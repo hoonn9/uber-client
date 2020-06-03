@@ -19,9 +19,11 @@
     "react": "^16.13.1",
     "react-apollo": "^2.1.9",
     "react-dom": "^16.13.1",
+    "react-facebook-login": "^4.1.1",
     "react-helmet": "^6.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-sidebar": "^3.0.2",
     "react-toastify": "^6.0.5",
     "styled-components": "^5.1.1",
     "styled-reset": "^4.1.5",
@@ -51,6 +53,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-sidebar": "^3.0.0",
     "@types/react-toastify": "^4.1.0"
   }
 }
