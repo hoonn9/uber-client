@@ -6,6 +6,8 @@ import theme from "../../theme";
 import { ThemeProvider } from "../../typed-components";
 import { IS_LOGGED_IN } from "./AppQueries.local";
 import AppPresenter from "./AppPresenter";
+import dotenv from "dotenv";
+dotenv.config();
 
 const AppContainer = ({ data }: any) => (
   <React.Fragment>

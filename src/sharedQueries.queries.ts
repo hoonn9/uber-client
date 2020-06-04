@@ -7,8 +7,26 @@ export const USER_PROFILE = gql`
       error
       user {
         profilePhoto
+        firstName
+        lastName
+        email
         fullName
         isDriving
+      }
+    }
+  }
+`;
+
+export const GET_PLACES = gql`
+  query getPlaces {
+    GetMyPlaces {
+      ok
+      error
+      places {
+        id
+        name
+        address
+        isFav
       }
     }
   }
