@@ -3,11 +3,7 @@
     "target": "es5",
     "outDir": "build/dist",
     "module": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -29,7 +25,5 @@
     "sourceMap": true,
     "rootDir": "src"
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

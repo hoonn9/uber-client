@@ -1,10 +1,13 @@
 import React from "react";
+import { MutationFn } from "react-apollo";
 import { Helmet } from "react-helmet";
 import Sidebar from "react-sidebar";
 import AddressBar from "../../Components/AddressBar";
 import Button from "../../Components/Button";
 import Menu from "../../Components/Menu";
 import styled from "../../typed-components";
+import { getRides, userProfile } from "../../types/api";
+import RidePopUp from "../../Components/RidePopUp";
 
 const Container = styled.div``;
 
@@ -53,6 +56,10 @@ interface IProps {
   onAddressSubmit: () => void;
   onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   price?: string;
+  data?: userProfile;
+  requestRideFn?: MutationFn<any, any>;
+  nearbyRide?: getRides;
+  acceptRideFn?: MutationFn<any, any>;
 }
 
 const HomePresenter: React.SFC<IProps> = ({
@@ -64,6 +71,10 @@ const HomePresenter: React.SFC<IProps> = ({
   onInputChange,
   onAddressSubmit,
   price,
+  data: { GetMyProfile: { user = null } = {} } = {},
+  nearbyRide: { GetNearbyRide: { ride = null } = {} } = {},
+  requestRideFn,
+  acceptRideFn,
 }) => (
   <Container>
     <Helmet>
@@ -82,24 +93,40 @@ const HomePresenter: React.SFC<IProps> = ({
       }}
     >
       {!loading && <MenuButton onClick={toggleMenu}>Open sidebar</MenuButton>}
-      <AddressBar
-        name={"toAddress"}
-        onChange={onInputChange}
-        value={toAddress}
-        onBlur={null}
-      />
+      {user && !user.isDriving && (
+        <React.Fragment>
+          <AddressBar
+            name={"toAddress"}
+            onChange={onInputChange}
+            value={toAddress}
+            onBlur={null}
+          />
+          <ExtendedButton
+            onClick={onAddressSubmit}
+            disabled={toAddress === ""}
+            value={price ? "Change address" : "Pick Address"}
+          />
+        </React.Fragment>
+      )}
       {price && (
         <RequestButton
-          onClick={onAddressSubmit}
+          onClick={requestRideFn}
           disabled={toAddress === ""}
           value={`Request Ride ($${price})`}
         />
       )}
-      <ExtendedButton
-        onClick={onAddressSubmit}
-        disabled={toAddress === ""}
-        value={price ? "Change address" : "Pick Address"}
-      />
+      {ride && (
+        <RidePopUp
+          id={ride.id}
+          pickUpAddress={ride.pickUpAddress}
+          dropOffAddress={ride.dropOffAddress}
+          price={ride.price}
+          distance={ride.distance}
+          passengerName={ride.passenger.fullName!}
+          passengerPhoto={ride.passenger.profilePhoto!}
+          acceptRideFn={acceptRideFn}
+        />
+      )}
       <Map ref={mapRef} />
     </Sidebar>
   </Container>

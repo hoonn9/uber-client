@@ -60,7 +60,8 @@ class SocialLoginContainer extends React.Component<IProps, IState> {
   }
 
   public loginCallback = (response) => {
-    const { name, first_name, last_name, email, id, accessToken } = response;
+    console.log(response);
+    const { name, email, id, accessToken } = response;
     if (accessToken) {
       toast.success(`Welcome ${name}!`);
       if (accessToken && this.facebookMutation) {
@@ -68,8 +69,8 @@ class SocialLoginContainer extends React.Component<IProps, IState> {
           variables: {
             email,
             fbId: id,
-            firstName: first_name,
-            lastName: last_name,
+            firstName: name.split(" ")[0],
+            lastName: name.split(" ")[1],
           },
         });
       }
