@@ -147,7 +147,10 @@ class HomeContainer extends React.Component<IProps, IState> {
                         subscribeToMore(rideSubscriptionOptions);
                       }
                       return (
-                        <AcceptRide mutation={ACCEPT_RIDE}>
+                        <AcceptRide
+                          mutation={ACCEPT_RIDE}
+                          onCompleted={this.handleRideAcceptance}
+                        >
                           {(acceptRideFn) => (
                             <HomePresenter
                               loading={loading}

@@ -12,6 +12,7 @@ import Ride from "Routes/Ride";
 import Settings from "Routes/Settings";
 import SocialLogin from "Routes/SocialLogin";
 import VerifyPhone from "Routes/VerifyPhone";
+import Chat from "../../Routes/Chat";
 
 interface IProps {
   isLoggedIn: boolean;
@@ -31,6 +32,7 @@ const LoggedInRouter: React.SFC = () => (
   <Switch>
     <Route path={"/"} exact={true} component={Home} />
     <Route path={"/ride/:rideId"} exact={true} component={Ride} />
+    <Route path={"/chat/:chatId"} exact={true} component={Chat} />
     <Route path={"/edit-account"} exact={true} component={EditAccount} />
     <Route path={"/settings"} exact={true} component={Settings} />
     <Route path={"/places"} exact={true} component={Places} />
